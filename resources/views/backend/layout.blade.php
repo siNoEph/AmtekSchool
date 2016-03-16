@@ -312,7 +312,7 @@
 										<a href="#"><i class="icon-stack2"></i> <span>Pages</span></a>
 										<ul>
 											@foreach ($pages as $page)
-											<li class="{{ Request::segment(3) == $page->id ? 'active' : null }}"><a href="{{ url('/adminpanel/pages/'.$page->id.'/edit') }}">{{ $page->page }}</a></li>
+											<li><a href="{{ url('/adminpanel/pages/'.$page->id.'/edit') }}">{{ $page->page }}</a></li>
 											@endforeach
 										</ul>
 									</li>

@@ -33,28 +33,6 @@
                             <button type="button" class="btn btn-primary pull-right"><i class="icon-diff-added position-left"></i> Add New</button>
                         </a>
                     </div>
-                    {{--
-                    <div class="col-md-6">
-                        <div class="content-group-lg">
-                            <h6 class="text-semibold">Kategori</h6>
-                            <select name="kategori" class="form-control" id="kat_gallery">
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($kategoris as $kategori)
-                                    <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="content-group-lg">
-                            <h6 class="text-semibold">Album</h6>
-                            <select name="album" class="form-control" id="album_gallery">
-                                <option value="">Pilih Kategori terlebih dahulu</option>
-                            </select>
-                        </div>
-                    </div>
-                    --}}
                 </div>
             </div>
 

@@ -122,7 +122,12 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+        $kategoris = Kategori::all();
+        if(!$article) {
+            abort(404);
+        }
+        return view('backend.article.edit', ['article' => $article, 'kategoris' => $kategoris]);
     }
 
     /**
@@ -134,7 +139,48 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'kategori' => 'required',
+            'title' => 'required|max:255',
+            'text' => 'required',
+        ]);
+
+        if ($request->image) {
+            $this->validate($request, [
+                'image' => 'image',
+            ]);
+            // checking file is valid.
+            if ($request->image->isValid()) {
+                $destinationPath = 'assets/articles'; // upload path
+                $extension = $request->image->getClientOriginalExtension(); // getting foto extension
+                $slug_file = str_slug($request->title, "_");
+                $fileName = $slug_file.'_'.rand(11111,99999).'.'.$extension; // renameing foto
+                \File::delete($destinationPath.'/'.$request->old_image); // delete old foto
+                $request->image->move($destinationPath, $fileName); // uploading file to given path
+            }
+            else {
+                // sending back with error message.
+                return redirect('adminpanel/article')->with('error', 'Uploaded file is not valid !');
+            }
+        }
+
+        $slug = str_slug($request->title, "-");
+
+        $article = Article::find($id);
+        $article->id_kategori = $request->kategori;
+        $article->id_user = $request->id_user;
+        $article->title = $request->title;
+        $article->slug = $slug;
+        $article->text = $request->text;
+        if ($request->image) {
+            $article->image = $fileName;
+        }
+        if ($request->video) {
+            $article->video = $request->video;
+        }
+        $article->save();
+
+        return redirect('adminpanel/article')->with('message', 'Update Article Done !');
     }
 
     /**
@@ -145,7 +191,10 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::find($id);
+        $article->delete();
+
+        return redirect('adminpanel/article')->with('message', 'Delete article Done !');
     }
 
     /**

@@ -21,12 +21,6 @@
             </div>
 
             <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="validation-valid-label pull-left">{{ Session::get('message') }}</label>
-                        <label class="validation-error-label pull-left">{{ Session::get('error') }}</label>
-                    </div>
-                </div>
 
                 {!! Form::open(array('url' => '/adminpanel/gallery/'.$foto->id, 'method' => 'PUT', 'files'=>true, 'class'=>'form-horizontal', 'role'=>'form')) !!}
                 <fieldset class="content-group">

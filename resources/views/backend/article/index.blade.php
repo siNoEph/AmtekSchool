@@ -53,16 +53,16 @@
                         <tr>
                             <td>
                                 @if($article->image)
-                                    <a href="{{ asset('/assets/article/'.$article->image) }}" data-popup="lightbox">
-                                        <img src="{{ asset('/assets/article/'.$article->image) }}" alt="" class="img-rounded img-preview">
+                                    <a href="{{ asset('/assets/articles/'.$article->image) }}" data-popup="lightbox">
+                                        <img src="{{ asset('/assets/articles/'.$article->image) }}" alt="" class="img-rounded img-preview">
                                     </a>
                                 @else
                                     Image not available
                                 @endif
                             </td>
                             <td>
-                                @if(!$article->video)
-                                    <img src="http://img.youtube.com/vi/mGUTs3vxSAg/0.jpg" alt="" class="img-rounded img-preview" data-toggle="modal" data-target="#modal_video{{ $article->id }}">
+                                @if($article->video)
+                                    <img src="http://img.youtube.com/vi/{{ $article->video }}/0.jpg" alt="" class="img-rounded img-preview" data-toggle="modal" data-target="#modal_video{{ $article->id }}">
 
                                     <!-- Basic modal -->
                                     <div id="modal_video{{ $article->id }}" class="modal fade">
@@ -70,7 +70,7 @@
                                             <div class="modal-content">
                                                 <div class="modal-body">                                                
                                                     <div class="video-container">
-                                                        <iframe allowfullscreen="" frameborder="0" mozallowfullscreen="" src="http://www.youtube.com/embed/mGUTs3vxSAg?autoplay=0" webkitallowfullscreen=""></iframe>
+                                                        <iframe allowfullscreen="" frameborder="0" mozallowfullscreen="" src="http://www.youtube.com/embed/{{ $article->video }}?autoplay=0" webkitallowfullscreen=""></iframe>
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,8 +93,8 @@
                                         </a>
 
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#"><i class="icon-pencil7"></i> Edit Article</a></li>
-                                            <li><a href="{{ url('/adminpanel/article/delete/'.$article->id) }}" onclick="return confirm('Are you sure you want to delete this article?');"><i class="icon-bin"></i> Delete Foto</a></li>
+                                            <li><a href="{{ url('/adminpanel/article/'.$article->id.'/edit') }}"><i class="icon-pencil7"></i> Edit Article</a></li>
+                                            <li><a href="{{ url('/adminpanel/article/delete/'.$article->id) }}" onclick="return confirm('Are you sure you want to delete this article?');"><i class="icon-bin"></i> Delete Article</a></li>
                                         </ul>
                                     </li>
                                 </ul>

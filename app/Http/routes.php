@@ -52,6 +52,7 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/adminpanel/kategori/delete/{id}', 'Backend\KategoriController@destroy');
 	Route::get('/adminpanel/gallery/delete/{id}', 'Backend\GalleryController@destroy');
 	Route::get('/adminpanel/gallery/deleteFoto/{id}/{file_foto}/{id_album}', 'Backend\GalleryController@deleteFoto');
+	Route::get('/adminpanel/article/delete/{id}', 'Backend\ArticleController@destroy');
 
 	Route::post('/adminpanel/pages/insertImage', 'Backend\PageController@insertImage');
     Route::post('/adminpanel/pages/{id}/insertImage', 'Backend\PageController@insertImage');

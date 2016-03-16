@@ -1,6 +1,6 @@
 @extends('backend.layout')
 
-@section('title', 'Create Article')
+@section('title', 'Edit Article')
 
 @section('meta')
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -14,7 +14,7 @@
 		<!-- Summernote click to edit -->
 		<div class="panel panel-flat">
 			<div class="panel-heading">
-				<h5 class="panel-title">Create Article</h5>
+				<h5 class="panel-title">Edit Article</h5>
 				<div class="heading-elements">
 					<ul class="icons-list">
                 		<li><a data-action="collapse"></a></li>
@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="panel-body">
-				{!! Form::open(array('url' => '/adminpanel/article', 'method' => 'POST', 'files'=>true, 'class'=>'form-horizontal', 'role'=>'form')) !!}
+				{!! Form::open(array('url' => '/adminpanel/article/'.$article->id, 'method' => 'Put', 'files'=>true, 'class'=>'form-horizontal', 'role'=>'form')) !!}
 				
 				<fieldset class="content-group">
                     <legend class="text-bold">Data Article</legend>
@@ -34,7 +34,15 @@
 
                     <div class="form-group {{ $errors->has('image') ? 'has-error has-feedback' : '' }}">
                         <label class="control-label col-lg-2">Image Article</label>
-                        <div class="col-lg-10">
+                        <div class="col-lg-2">
+                            @if($article->image)
+                                <a href="{{ asset('/assets/articles/'.$article->image) }}" data-popup="lightbox">
+                                    <img src="{{ asset('/assets/articles/'.$article->image) }}" alt="" class="img-rounded img-preview">
+                                </a>
+                            @endif
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="hidden" value="{{ $article->image }}" name="old_image">
                             <input type="file" name="image" class="form-control">
                             @if ($errors->has('image'))
                                 <div class="form-control-feedback">
@@ -47,8 +55,25 @@
 
                     <div class="form-group {{ $errors->has('video') ? 'has-error has-feedback' : '' }}">
                         <label class="control-label col-lg-2">Link Video</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" name="video" value="{{ old('video') }}" placeholder="Link Video Article">
+                        <div class="col-lg-2">
+                            <img src="http://img.youtube.com/vi/{{ $article->video }}/0.jpg" alt="" class="img-rounded img-preview" data-toggle="modal" data-target="#modal_video{{ $article->id }}">
+
+                            <!-- Basic modal -->
+                            <div id="modal_video{{ $article->id }}" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body">                                                
+                                            <div class="video-container">
+                                                <iframe allowfullscreen="" frameborder="0" mozallowfullscreen="" src="http://www.youtube.com/embed/{{ $article->video }}?autoplay=0" webkitallowfullscreen=""></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /basic modal -->
+                        </div>
+                        <div class="col-lg-8">
+                            <input type="text" class="form-control" name="video" value="{{ $article->video }}" placeholder="Link Video Article">
                             @if ($errors->has('video'))
                                 <div class="form-control-feedback">
                                     <i class="icon-cancel-circle2"></i>
@@ -66,7 +91,7 @@
                             <select name="kategori" class="form-control">
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($kategoris as $kategori)
-                                    <option value="{{ $kategori->id }}">{{ $kategori->kategori }}</option>
+                                    <option value="{{ $kategori->id }}" {{ ($article->id_kategori == $kategori->id) ? 'selected="selected"' : '' }}>{{ $kategori->kategori }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('kategori'))
@@ -81,7 +106,7 @@
                     <div class="form-group {{ $errors->has('title') ? 'has-error has-feedback' : '' }}">
                         <label class="control-label col-lg-2">Title Article</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Title Article">
+                            <input type="text" class="form-control" name="title" value="{{ $article->title }}" placeholder="Title Article">
                             @if ($errors->has('title'))
                                 <div class="form-control-feedback">
                                     <i class="icon-cancel-circle2"></i>
@@ -94,7 +119,7 @@
                     <div class="form-group {{ $errors->has('text') ? 'has-error has-feedback' : '' }}">
                         <div class="col-lg-12">
 			                <textarea id="textNewArticle" name="text" placeholder="Text Article">
-								{!! old('text') !!}
+								{!! $article->text !!}
 							</textarea>
                             @if ($errors->has('text'))
                                 <div class="form-control-feedback">
