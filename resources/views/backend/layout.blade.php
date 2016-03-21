@@ -31,6 +31,8 @@
 	<script type="text/javascript" src="{{ asset('/assets/backend/js/plugins/editors/summernote/summernote.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/assets/backend/js/plugins/forms/styling/uniform.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/assets/backend/js/plugins/media/fancybox.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/assets/backend/js/plugins/pickers/pickadate/picker.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('/assets/backend/js/plugins/pickers/pickadate/picker.date.js') }}"></script>
 
 	<script type="text/javascript" src="{{ asset('/assets/backend/js/core/app.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('/assets/backend/js/pages/datatables_basic.js') }}"></script>
@@ -318,6 +320,7 @@
 									</li>
 									<li class="{{ Request::segment(2) === 'gallery' ? 'active' : null }}"><a href="{{ url('/adminpanel/gallery') }}"><i class="icon-images2"></i> <span>Gallery</span></a></li>
 									<li class="{{ Request::segment(2) === 'article' ? 'active' : null }}"><a href="{{ url('/adminpanel/article') }}"><i class="icon-stack"></i> <span>Manage Article</span></a></li>
+									<li class="{{ Request::segment(2) === 'staf' ? 'active' : null }}"><a href="{{ url('/adminpanel/staf') }}"><i class="icon-user-tie"></i> <span>Data Staf</span></a></li>
 
 								</ul>
 							</div>

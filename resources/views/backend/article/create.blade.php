@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="panel-body">
-				{!! Form::open(array('url' => '/adminpanel/article', 'method' => 'POST', 'files'=>true, 'class'=>'form-horizontal', 'role'=>'form')) !!}
+				{!! Form::open(array('url' => '/adminpanel/article', 'method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'role' => 'form')) !!}
 				
 				<fieldset class="content-group">
                     <legend class="text-bold">Data Article</legend>

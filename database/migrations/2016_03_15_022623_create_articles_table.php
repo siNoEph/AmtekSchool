@@ -21,6 +21,7 @@ class CreateArticlesTable extends Migration
             $table->text('text');
             $table->string('image');
             $table->string('video');
+            $table->integer('viewer')->default(0);
             $table->timestamps();
 
             $table->foreign('id_kategori')

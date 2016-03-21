@@ -26,7 +26,7 @@
                 <fieldset class="content-group">
                     <legend class="text-bold">Data User Admin</legend>
 
-                    <div class="form-group {{ $errors->has('name') ? 'has-error has-feedback' : '' }}">
+                    <div class="form-group {{ $errors->has('foto') ? 'has-error has-feedback' : '' }}">
                         <label class="control-label col-lg-2">Foto User</label>
                         <div class="col-lg-10">
                             <input type="file" name="foto" class="form-control">

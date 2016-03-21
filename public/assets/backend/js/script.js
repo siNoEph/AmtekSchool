@@ -107,4 +107,10 @@ $(function() {
     $('[data-popup="lightbox"]').fancybox({
         padding: 3
     });
+
+    // Single picker
+    $('.pickadate').pickadate({        
+        selectMonths: true,
+        selectYears: true
+    });
 });

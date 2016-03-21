@@ -2,10 +2,6 @@
 
 @section('title', 'Gallery')
 
-@section('meta')
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-@endsection
-
 @section('content')
 
     <!-- Content area -->
@@ -29,14 +25,19 @@
                     <div class="col-md-12">
                         <label class="validation-valid-label pull-left">{{ Session::get('message') }}</label>
                         <label class="validation-error-label pull-left">{{ Session::get('error') }}</label>
-                        <a href="{{ url('/adminpanel/gallery/create') }}">
-                            <button type="button" class="btn btn-primary pull-right"><i class="icon-diff-added position-left"></i> Add New</button>
-                        </a>
+                        <div class="text-right">
+                            <a href="{{ url('/adminpanel/album/listAlbum') }}">
+                                <button type="button" class="btn btn-success"><i class="icon-list-unordered position-left"></i> List Album</button>
+                            </a>
+                            <a href="{{ url('/adminpanel/gallery/create') }}">
+                                <button type="button" class="btn btn-primary"><i class="icon-diff-added position-left"></i> Add New</button>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <table class="table table-striped table-gallery table-lg">
+            <table class="table table-striped table-foto table-lg">
                 <thead>
                     <tr>
                         <th>Foto</th>

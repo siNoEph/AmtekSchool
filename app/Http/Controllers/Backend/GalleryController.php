@@ -102,7 +102,7 @@ class GalleryController extends Controller
                 $foto = new Foto;
                 $foto->id_album = $max_id_album;
                 $foto->id_user = $request->id_user;
-                $foto->caption = 'Foto - '.$uploadcount.', Album : '.$request->album;
+                $foto->caption = 'Foto on Album : '.$request->album;
                 $foto->file = $fileName;
                 $foto->save();
 
@@ -209,6 +209,81 @@ class GalleryController extends Controller
         $foto->delete();
 
         return redirect('adminpanel/gallery')->with('message', 'Foto Deleted !');
+    }
+
+    public function listAlbum()
+    {
+        $albums = DB::table('albums')
+            ->join('kategoris', 'albums.id_kategori', '=', 'kategoris.id')
+            ->select('albums.*', 'kategoris.kategori')
+            ->get();
+
+        return view('backend.gallery.list', ['albums' => $albums]);
+    }
+
+    public function editAlbum($id)
+    {
+        $album = Album::find($id);
+        $kategoris = Kategori::all();
+        return view('backend.gallery.editAlbum', ['album' => $album, 'kategoris' => $kategoris]);
+    }
+
+    public function updateAlbum(Request $request, $id)
+    {
+        $this->validate($request, [
+            'kategori' => 'required|max:255',
+            'album' => 'required|max:255',
+            'desc' => 'required'
+        ]);
+
+        $album = Album::find($id);
+        $album->id_kategori = $request->kategori;
+        $album->album = $request->album;
+        $album->desc = $request->desc;
+        $album->save();
+
+        return redirect('adminpanel/album/listAlbum')->with('message', 'Update Data Done !');
+    }
+
+    public function addFoto($id)
+    {
+        $album = Album::find($id);
+        return view('backend.gallery.addFoto', ['album' => $album]);
+    }
+
+    public function storeFoto(Request $request, $id)
+    {
+        $this->validate($request, [
+            'foto' => 'required',
+        ]);
+
+        // checking file is valid.
+        if ($request->foto) {
+
+            // slug name album
+            $slug_album = str_slug($request->album, "_");
+
+            foreach($request->foto as $file) {
+                $destinationPath = 'assets/gallery/'.$slug_album; // upload path
+                $extension = $file->getClientOriginalExtension(); // getting foto extension
+                $fileName = $slug_album.'_'.rand(11111,99999).'.'.$extension; // renameing foto
+                $file->move($destinationPath, $fileName); // uploading file to given path
+
+                // Insert foto
+                $foto = new Foto;
+                $foto->id_album = $request->id_album;
+                $foto->id_user = $request->id_user;
+                $foto->caption = 'Foto on Album : '.$request->album;
+                $foto->file = $fileName;
+                $foto->save();
+            }
+            // sending success message.
+            return redirect('adminpanel/gallery')->with('message', 'Uploaded foto on album Done !');
+        }
+        else {
+            // sending back with error message.
+            return redirect('adminpanel/album/listAlbum')->with('error', 'Uploaded file is not valid !');
+        }
     }
 
     public function getAlbum(Request $request)

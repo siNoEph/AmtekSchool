@@ -2,10 +2,6 @@
 
 @section('title', 'Article')
 
-@section('meta')
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-@endsection
-
 @section('content')
 
     <!-- Content area -->

@@ -160,7 +160,7 @@ class ArticleController extends Controller
             }
             else {
                 // sending back with error message.
-                return redirect('adminpanel/article')->with('error', 'Uploaded file is not valid !');
+                return redirect('adminpanel/article')->with('error', 'Please insert image with extension jpeg, png or gif !');
             }
         }
 

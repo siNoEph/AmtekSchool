@@ -55,6 +55,7 @@ $(function() {
 
     // Datatable Pages
     $('.table-pages').DataTable({
+        lengthMenu: [ 5, 10, 25 ],
         columnDefs: [{
             orderable: false,
             width: '100px',
@@ -64,6 +65,7 @@ $(function() {
 
     // Datatable Kategori
     $('.table-kategori').DataTable({
+        lengthMenu: [ 5, 10, 25 ],
         columnDefs: [{
             orderable: false,
             width: '100px',
@@ -71,8 +73,8 @@ $(function() {
         }]
     });
 
-    // Datatable Gallery
-    $('.table-gallery').DataTable({
+    // Datatable Foto Gallery
+    $('.table-foto').DataTable({
         columnDefs: [
             {
                 orderable: false,
@@ -85,6 +87,15 @@ $(function() {
                 targets: 5
             }
         ]
+    });
+
+    // Datatable Album
+    $('.table-album').DataTable({
+        columnDefs: [{
+            orderable: false,
+            width: '100px',
+            targets: [ 4 ]
+        }]
     });
 
     // Datatable Kategori

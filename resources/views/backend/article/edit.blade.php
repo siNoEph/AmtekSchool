@@ -132,7 +132,7 @@
                 </fieldset>
 
                 <div class="text-right">
-                    <button type="submit" class="btn btn-primary">Create <i class="icon-diff-added position-right"></i></button>
+                    <button type="submit" class="btn btn-primary">Edit <i class="icon-pencil7 position-right"></i></button>
                 </div>
 
 				{!! Form::close() !!}

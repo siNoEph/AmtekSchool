@@ -32,6 +32,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::resource('/adminpanel/kategori', 'Backend\KategoriController');
     Route::resource('/adminpanel/gallery', 'Backend\GalleryController');
     Route::resource('/adminpanel/article', 'Backend\ArticleController');
+    Route::resource('/adminpanel/staf', 'Backend\StafController');
 });
 
 Route::group(['middleware' => 'web'], function () {
@@ -52,10 +53,16 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/adminpanel/kategori/delete/{id}', 'Backend\KategoriController@destroy');
 	Route::get('/adminpanel/gallery/delete/{id}', 'Backend\GalleryController@destroy');
 	Route::get('/adminpanel/gallery/deleteFoto/{id}/{file_foto}/{id_album}', 'Backend\GalleryController@deleteFoto');
+    Route::get('/adminpanel/staf/delete/{id}', 'Backend\StafController@destroy');
+    Route::get('/adminpanel/album/listAlbum', 'Backend\GalleryController@listAlbum');
+    Route::get('/adminpanel/album/addFoto/{id}', 'Backend\GalleryController@addFoto');
+    Route::get('/adminpanel/album/{id}/edit', 'Backend\GalleryController@editAlbum');
 	Route::get('/adminpanel/article/delete/{id}', 'Backend\ArticleController@destroy');
 
 	Route::post('/adminpanel/pages/insertImage', 'Backend\PageController@insertImage');
     Route::post('/adminpanel/pages/{id}/insertImage', 'Backend\PageController@insertImage');
+    Route::post('/adminpanel/album/storeFoto/{id}', 'Backend\GalleryController@storeFoto');
+    Route::post('/adminpanel/album/{id}', 'Backend\GalleryController@updateAlbum');
     Route::post('/adminpanel/article/insertImage', 'Backend\ArticleController@insertImage');
     Route::post('/adminpanel/article/{id}/insertImage', 'Backend\ArticleController@insertImage');
 
